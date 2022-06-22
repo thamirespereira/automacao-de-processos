@@ -1,0 +1,58 @@
+import pyautogui
+import time
+import pyperclip
+
+pyautogui.PAUSE = 1
+
+# abrir navegador
+pyautogui.hotkey("ctrl" , "t")
+
+# exportar base de dados
+link = "https://drive.google.com/drive/folders/149xknr9JvrlEnhNWO49zPcw0PW5icxga"
+pyperclip.copy(link)
+pyautogui.hotkey("ctrl" , "v")
+pyautogui.press("enter")
+time.sleep(10)
+pyautogui.click(x=408, y=297 , clicks = 2)
+time.sleep(10)
+pyautogui.click(x=404, y=377)
+pyautogui.click(x=1164, y=187)
+pyautogui.click(x=992, y=557)
+time.sleep(5)
+
+
+# calcular indicadores
+import pandas as pd
+tabela = pd.read_excel(r"C:\Users\Thamires\Downloads\Vendas - Dez.xlsx") #local arquivo
+display(tabela)
+faturamento = tabela["Valor Final"].sum()
+quantidade = tabela["Quantidade"].sum()
+time.sleep(3)
+
+# enviar relatorio por email
+pyautogui.hotkey("ctrl" , "t")
+pyperclip.copy("https://mail.google.com/mail/u/0/#inbox") # abrir gmail
+pyautogui.hotkey("ctrl" , "v")
+pyautogui.press("enter")
+time.sleep(10)
+pyautogui.click(x=98, y=202) # escrever email
+pyautogui.write("") # email de destino
+pyautogui.press("tab")
+pyautogui.press("tab")
+pyperclip.copy("Relatório de Vendas")
+pyautogui.hotkey("ctrl" , "v")                
+pyautogui.press("tab")
+
+texto = f"""
+Prezados, bom dia
+
+O faturamento de ontem foi de: R${faturamento:,.2f}
+A quantidade de produtos foi de: {quantidade:,}
+
+Abs
+"""
+                
+pyperclip.copy(texto)
+pyautogui.hotkey("ctrl","v")
+pyautogui.hotkey("ctrl" , "enter") # enviar               
+                
