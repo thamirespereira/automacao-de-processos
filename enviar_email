@@ -4,7 +4,7 @@ import pyperclip
 
 pyautogui.PAUSE = 1
 
-# abrir navegador
+# abrir nova guia
 pyautogui.hotkey("ctrl" , "t")
 
 # exportar base de dados
